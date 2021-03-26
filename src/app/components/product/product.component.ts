@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductResponseModel } from 'src/app/models/productResponseModel';
 import { HttpClient } from '@angular/common/http';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -10,8 +11,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
-  apiUrl = 'https://localhost:44369/api/products/getall';
-  constructor(private httpClient: HttpClient) {}
+  dataLoaded = false;
+  constructor(private productService:ProductService) {}
 
   ngOnInit(): void {
     //component calistiginda ilk calisan kod ctor degildir.
@@ -19,10 +20,13 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.httpClient
-    .get<ProductResponseModel>(this.apiUrl)//gelen data productResponseModele Map edilecek.
-    .subscribe((response) => {//yanit basarili sekilde geldiginde napayim?
-      this.products=response.data;//response datasini product nesnesine ata  
-    }); 
+    this.productService.getProducts().subscribe(response=> {
+      this.products=response.data;
+      this.dataLoaded=true;
+      console.log(this.dataLoaded);
+    })
+    console.log(this.dataLoaded);
+    console.log("asdasdqwdfq");
+    
   }
 }
