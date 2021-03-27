@@ -9,13 +9,13 @@ import { CategoryComponent } from './components/category/category.component';
 import { NaviComponent } from './components/navi/navi.component';
 
 @NgModule({
-  declarations: [
+  declarations: [//user dependency
     AppComponent,
     ProductComponent,
     CategoryComponent,
     NaviComponent
   ],
-  imports: [
+  imports: [//dev dependency 
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
