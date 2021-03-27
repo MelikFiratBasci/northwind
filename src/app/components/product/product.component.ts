@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   constructor(private productService:ProductService) {}
 
   ngOnInit(): void {
-    //component calistiginda ilk calisan,kod ctor degildir.
+    //component calistiginda ilk calisan kod,ctor degildir.
     this.getProducts();
   }
 
