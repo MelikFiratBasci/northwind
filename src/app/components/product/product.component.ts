@@ -41,6 +41,10 @@ export class ProductComponent implements OnInit {
     })
   }
   addToCart(product:Product){
+    if (product.productId===1) {
+      this.toastrService.error("hata","Bu urun eklenemez")
+    }else{
     this.toastrService.success("Sepete Eklendi",product.productName);
+    }
   }
 }
