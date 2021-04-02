@@ -1,3 +1,4 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cartItem';
 import { CartItems } from '../models/cartItems';
@@ -22,5 +23,9 @@ export class CartService {
   }
   list():CartItem[]{
     return CartItems;//public variable const
+  }
+  removeFromCart(product:Product){
+    let item = CartItems.find(c=>c.product.productId===product.productId);
+    CartItems.splice(CartItems.indexOf(item),1);//itemin bulundugu indexi sil,javascriptte arrayden remove  
   }
 }
