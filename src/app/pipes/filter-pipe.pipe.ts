@@ -9,7 +9,7 @@ export class FilterPipePipe implements PipeTransform {
   transform(value: Product[], filterText:string): Product[] {
     filterText = filterText?filterText.toLocaleLowerCase():""//ternary
     return filterText?
-    value.filter((p:Product)=>p.productName.toLocaleLowerCase().indexOf(filterText)!==-1)//indexOf return matched index number 
+    value.filter((p:Product)=>p.productName.toLocaleLowerCase().indexOf(filterText)!==-1)//indexOf returns matched index number 
     :value;
   }
 
