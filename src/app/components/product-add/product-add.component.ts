@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,Validators} from "@angular/forms"
+import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
@@ -9,7 +11,7 @@ import {FormGroup,FormBuilder,FormControl,Validators} from "@angular/forms"
 })
 export class ProductAddComponent implements OnInit {
   productAddForm: FormGroup;
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private toastrService:ToastrService, private formBuilder:FormBuilder,private productService:ProductService) { }
   
   ngOnInit(): void {
     this.crateProductAddForm();
@@ -21,6 +23,23 @@ export class ProductAddComponent implements OnInit {
       unitsInStock:["",Validators.required],
       categoryId:["",Validators.required]
     })
+  }
+  add(){
+    if (this.productAddForm.valid) {
+    let productModel = Object.assign({},this.productAddForm.value)
+    this.productService.add(productModel).subscribe(response=>{
+      console.log(response);
+      this.toastrService.success(response.message,"Basarili");
+    },responseError=>{
+      console.log(responseError.error);
+      this.toastrService.error(responseError.error)
+    });
+    
+    }
+    else{
+    this.toastrService.error("Hatalı Form","Dikkat");
+    }
+    
   }
 
 
